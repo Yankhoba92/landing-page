@@ -20,7 +20,8 @@ function App() {
 
   const handleStyle = (e) => {
     // On lance la fonction au clic sur le bouton
-setIsActive(!isActive)
+    const box = e.target.dataset.box
+setIsActive(box)
     // console.log(icon.current);
     setTemplateArea(
       gridTemplateAres[e.target.dataset.box] || gridTemplateAres["1"]
@@ -40,13 +41,13 @@ setIsActive(!isActive)
         {[1, 2, 3].map((box) => {
           const numero = `box${box}`;
           return (
-            <Box key={numero} className={numero} id={isActive ? "active" : null}>
+            <Box key={numero} className={`${numero}` + " box"} id={isActive == box ? "active" : null}>
               <Fab
                 aria-label="add"
                 data-box={box}
                 onClick={handleStyle}
                 sx={{ position: "absolute", bottom: "5%", right: "5%" }}
-                // ref={icon}
+                
               >
                 <AddIcon data-icon={box} />
               </Fab>
