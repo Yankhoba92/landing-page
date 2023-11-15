@@ -1,40 +1,38 @@
-import { useState } from "react";
 import "./App.css";
-import { Box, Button, Stack, Typography } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import SendIcon from "@mui/icons-material/Send";
+import { Box, Stack, Typography, Fab } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 
 function App() {
   return (
     <>
-
-<Typography variant="subtitle1" textTransform={"uppercase"}> Caractéristique</Typography>
-<Typography variant="h1" fontWeight={600}>Plus de puissance pour plus d'efficacité</Typography>
-<Stack direction="row" spacing={2} paddingTop={5}>
-  <Box sx={{width:"50%", height:450, borderRadius:1, bgcolor:"primary.main"}}></Box>
-<Stack width={"50%"} spacing={2}>
-  <Box sx={{width:"100%", height:"50%", borderRadius:1, bgcolor:"primary.main"}}></Box>
-  <Box sx={{width:"100%", height:"50%", borderRadius:1, bgcolor:"primary.main"}}></Box>
-</Stack >
-</Stack>
-
-
-
-
-
-      {/* <div>
-        <Button variant="text" color="error" size="small">
-          text
-        </Button>
-        <br />
-        <Button variant="outlined" color="secondary" size="large">
-          Outlined
-        </Button>
-        <br />
-        <Button variant="contained" color="success" size="medium" startIcon={<SendIcon />}>
-          Contained
-        </Button>
-      </div> */}
+      <Typography variant="subtitle1" textTransform={"uppercase"}>
+        Caractéristiques
+      </Typography>
+      <Typography variant="h3" fontWeight={600}>
+        Plus de puissance pour plus d'efficacité
+      </Typography>
+      <Stack direction="row" spacing={2} paddingTop={5}>
+        <Box sx={{ width: '50%', height: 450, borderRadius: '2vw 4vw', bgcolor: "info.main", position: 'relative'}}>
+        
+          <Fab color="info.light" aria-label="add" sx={{ position: 'absolute', bottom: '5%', right: '5%', }}>
+            <AddIcon />
+          </Fab>
+        </Box>
+        <Stack width="50%" spacing={2}>
+          <Box sx={{ width: '100%', height: '50%', borderRadius: '2vw', bgcolor: "secondary.main", position: 'relative'}}>
+            
+            <Fab color="info.light" aria-label="add" sx={{ position: 'absolute', bottom: '5%', right: '5%', }}>
+              <AddIcon />
+            </Fab>
+          </Box>
+          <Box sx={{ width: '100%', height: '50%', borderRadius: '2vw', bgcolor: "success.main", position: 'relative'}}>
+            
+            <Fab color="info.light" aria-label="add" sx={{ position: 'absolute', bottom: '5%', right: '5%', }}>
+              <AddIcon />
+            </Fab>
+          </Box>
+        </Stack>
+      </Stack>
     </>
   );
 }
