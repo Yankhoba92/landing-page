@@ -1,21 +1,30 @@
 import "./App.css";
 import { Box, Stack, Typography, Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 function App() {
-  const [templateArea, setTemplateArea] = useState({ // Mise en place de la grille par défaut
-    gridTemplateAreas: `'box1 box2' 'box1 box3'`
+  const [templateArea, setTemplateArea] = useState({
+    // Mise en place de la grille par défaut
+    gridTemplateAreas: `'box1 box2' 'box1 box3'`,
   });
+  const [isActive, setIsActive] = useState(false)
 
-  const gridTemplateAres = { // Les grilles disponibles
-    "1": {gridTemplateAreas: `'box1 box2' 'box1 box3'`},
-    "2": {gridTemplateAreas: `'box1 box2' 'box3 box2'`},
-    "3": {gridTemplateAreas: `'box1 box3' 'box2 box3'`},
-  }
+  const gridTemplateAres = {
+    // Les grilles disponibles
+    1: { gridTemplateAreas: `'box1 box2' 'box1 box3'`, gridTemplateColumns:'11fr 1fr'},
+    2: { gridTemplateAreas: `'box1 box2' 'box3 box2'`, gridTemplateColumns:'1fr 11fr' },
+    3: { gridTemplateAreas: `'box1 box2' 'box3 box3'`, gridTemplateColumns:'2fr 10fr' },
+  };
+  // const icon = useRef(null) // Déclaration dde la référence
 
-  const handleStyle = (e) => { // On lance la fonction au clic sur le bouton
-    setTemplateArea(gridTemplateAres[e.target.dataset.box] || gridTemplateAres["1"])
+  const handleStyle = (e) => {
+    // On lance la fonction au clic sur le bouton
+setIsActive(!isActive)
+    // console.log(icon.current);
+    setTemplateArea(
+      gridTemplateAres[e.target.dataset.box] || gridTemplateAres["1"]
+    );
   };
 
   return (
@@ -28,17 +37,22 @@ function App() {
       </Typography>
 
       <Stack className="box-container" marginTop={5} style={templateArea}>
-        {[ 1, 2 ,3 ].map((box) => {
-            const numero = `box${box}`
-            return(
-              <Box key={numero} className={numero}>
-                <Fab aria-label="add" data-box={box} onClick={handleStyle} sx={{ position: "absolute", bottom: "5%", right: "5%" }}>
-                  <AddIcon data-icon={box} />
-                </Fab>
-              </Box>
-            )
-          })
-        }
+        {[1, 2, 3].map((box) => {
+          const numero = `box${box}`;
+          return (
+            <Box key={numero} className={numero} id={isActive ? "active" : null}>
+              <Fab
+                aria-label="add"
+                data-box={box}
+                onClick={handleStyle}
+                sx={{ position: "absolute", bottom: "5%", right: "5%" }}
+                // ref={icon}
+              >
+                <AddIcon data-icon={box} />
+              </Fab>
+            </Box>
+          );
+        })}
       </Stack>
     </>
   );
